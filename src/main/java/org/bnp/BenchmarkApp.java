@@ -9,7 +9,7 @@ import org.bnp.util.DiskSizeChecker;
 
 public class BenchmarkApp {
     // Количество записей для генерации
-    private static final int RECORD_COUNT = 1_000;
+    private static final int RECORD_COUNT = 1_000_000;
 
     public static void main(String[] args) throws Exception {
         System.out.println("Генерация " + RECORD_COUNT + " записей...");
