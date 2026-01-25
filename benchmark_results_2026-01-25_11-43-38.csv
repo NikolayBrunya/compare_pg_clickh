@@ -1,0 +1,5 @@
+metric,clickhouse,postgresql,ratio
+insert_time_ms,2874,32026,11,14
+analytical_time_ms,67,447,6,67
+disk_size_bytes,21486284,146186240,6,80
+total_time_ms,2941,32473,11,04
