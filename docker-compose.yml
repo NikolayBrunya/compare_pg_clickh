@@ -29,13 +29,15 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-#  benchmark:
-#    build: .
-#    container_name: compare_pg_clickh-benchmark
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      clickhouse:
-#        condition: service_healthy
-#    env_file:
-#      - .env
+  benchmark:
+    build: .
+    container_name: compare_pg_clickh-benchmark
+    depends_on:
+      postgres:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - ./results:/app
