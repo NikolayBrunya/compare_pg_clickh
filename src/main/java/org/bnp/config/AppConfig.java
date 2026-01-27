@@ -39,7 +39,7 @@ public class AppConfig {
         } catch (IOException ignored) { }
 
         // 3. Значение по умолчанию
-        return 1_000;
+        return 1_000_000;
     }
     /**
      * URL ClickHouse
