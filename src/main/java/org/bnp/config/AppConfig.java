@@ -6,7 +6,45 @@ import java.util.Properties;
 
 public class AppConfig {
 
-    // ClickHouse
+     /**
+     * Количество записей для генерации
+     * @return Количество записей для генерации
+     */
+
+    public static int getRecordCount() {
+        // 1. Из переменной окружения
+        String env = System.getenv("RECORD_COUNT");
+        if (env != null && !env.trim().isEmpty()) {
+            try {
+                return Integer.parseInt(env.trim());
+            } catch (NumberFormatException e) {
+                System.err.println("Некорректное значение RECORD_COUNT: " + env + ". Используется значение по умолчанию.");
+            }
+        }
+
+        // 2. Из application.properties
+        try (InputStream is = AppConfig.class.getClassLoader().getResourceAsStream("application.properties")) {
+            if (is != null) {
+                Properties props = new Properties();
+                props.load(is);
+                String prop = props.getProperty("record.count");
+                if (prop != null && !prop.trim().isEmpty()) {
+                    try {
+                        return Integer.parseInt(prop.trim());
+                    } catch (NumberFormatException e) {
+                        System.err.println("Некорректное значение record.count в application.properties. Используется значение по умолчанию.");
+                    }
+                }
+            }
+        } catch (IOException ignored) { }
+
+        // 3. Значение по умолчанию
+        return 1_000;
+    }
+    /**
+     * URL ClickHouse
+     * @return URL ClickHouse
+     */
     public static String getClickhouseUrl() {
         String env = System.getenv("CLICKHOUSE_URL");
         if (env != null && !env.trim().isEmpty()) {

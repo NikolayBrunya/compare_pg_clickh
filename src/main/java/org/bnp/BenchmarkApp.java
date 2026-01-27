@@ -1,5 +1,6 @@
 package org.bnp;
 
+import org.bnp.config.AppConfig;
 import org.bnp.db.ClickHouseManager;
 import org.bnp.db.PostgresManager;
 import org.bnp.generator.DataGenerator;
@@ -8,10 +9,13 @@ import org.bnp.util.DiskSizeChecker;
 
 
 public class BenchmarkApp {
-    // Количество записей для генерации
-    private static final int RECORD_COUNT = 1_000_000;
+
 
     public static void main(String[] args) throws Exception {
+
+        // Количество записей для генерации
+        int RECORD_COUNT = AppConfig.getRecordCount();
+
         System.out.println("Генерация " + RECORD_COUNT + " записей...");
         var data = DataGenerator.generate(RECORD_COUNT);
 
