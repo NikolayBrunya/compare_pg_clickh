@@ -59,7 +59,7 @@ public class AppConfig {
         if (env != null && !env.trim().isEmpty()) {
             return env;
         }
-        return getProperty("postgres.url", "jdbc:postgresql://localhost:5433/postgres");
+        return getProperty("postgres.url", "jdbc:postgresql://localhost:5432/postgres");
     }
 
     public static String getPostgresUser() {

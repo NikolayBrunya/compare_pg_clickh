@@ -7,6 +7,8 @@ import org.bnp.generator.DataGenerator;
 import org.bnp.util.CsvExporter;
 import org.bnp.util.DiskSizeChecker;
 
+import java.sql.SQLException;
+
 
 public class BenchmarkApp {
 
@@ -14,10 +16,21 @@ public class BenchmarkApp {
     public static void main(String[] args) throws Exception {
 
         // Количество записей для генерации
+        System.out.println("Стартуем!");
+        System.out.println("Читаем количество записей для генерации теста.");
         int RECORD_COUNT = AppConfig.getRecordCount();
 
         System.out.println("Генерация " + RECORD_COUNT + " записей...");
         var data = DataGenerator.generate(RECORD_COUNT);
+
+        // Явно загружаем драйвер
+        try {
+            Class.forName("com.clickhouse.jdbc.ClickHouseDriver");
+            System.out.println("ClickHouse driver loaded successfully");
+        } catch (ClassNotFoundException e) {
+            System.err.println("Failed to load ClickHouse driver: " + e.getMessage());
+            throw new SQLException("ClickHouse driver not found", e);
+        }
 
         // ClickHouse
         System.out.println("\n=== ClickHouse ===");
