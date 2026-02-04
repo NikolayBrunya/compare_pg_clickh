@@ -50,7 +50,7 @@ public class AppConfig {
         if (env != null && !env.trim().isEmpty()) {
             return env;
         }
-        return getProperty("clickhouse.url", "jdbc:clickhouse://localhost:8123/default");
+        return getProperty("clickhouse.url", "jdbc:clickhouse://host.docker.internal:8123/default");
     }
 
     // PostgreSQL
@@ -59,7 +59,7 @@ public class AppConfig {
         if (env != null && !env.trim().isEmpty()) {
             return env;
         }
-        return getProperty("postgres.url", "jdbc:postgresql://localhost:5432/postgres");
+        return getProperty("postgres.url", "jdbc:postgresql://host.docker.internal:5432/postgres");
     }
 
     public static String getPostgresUser() {

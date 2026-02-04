@@ -1,6 +1,7 @@
 package org.bnp.util;
 
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -17,7 +18,9 @@ public class CsvExporter {
             long pgDiskBytes
     ) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-        String filename = "benchmark_results_" + timestamp + ".csv";
+        File dir = new File("results");
+        dir.mkdirs();
+        String filename = "results/benchmark_results_" + timestamp + ".csv";
 
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write("metric,clickhouse,postgresql,ratio\n");
